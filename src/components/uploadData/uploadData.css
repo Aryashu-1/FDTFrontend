@@ -59,6 +59,14 @@
   font-size: 1rem;
 }
 
+/* Form Styles */
+.container {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .bg-white {
   background-color: #fff;
 }
@@ -150,10 +158,6 @@
   color: #fff;
 }
 
-.rounded-lg {
-  border-radius: 10px;
-}
-
 button {
   transition: background-color 0.3s ease;
 }
@@ -171,15 +175,21 @@ label {
   font-weight: bold;
 }
 
-input[type="text"], input[type="date"] {
+input[type="text"],
+input[type="date"] {
   height: 40px;
 }
 
-input[type="submit"], button {
+input[type="submit"],
+button {
   cursor: pointer;
 }
 
-input[type="text"], input[type="date"], input[type="file"], input[type="radio"], input[type="checkbox"] {
+input[type="text"],
+input[type="date"],
+input[type="file"],
+input[type="radio"],
+input[type="checkbox"] {
   margin-top: 0.25rem;
   display: block;
   width: 100%;
@@ -189,7 +199,9 @@ form > * {
   margin-bottom: 1rem;
 }
 
-input, label, button {
+input,
+label,
+button {
   font-size: 1rem;
 }
 
@@ -211,5 +223,5 @@ button:hover {
 form {
   display: flex;
   flex-direction: column;
-  padding-right:10px;
+  padding-right: 10px;
 }
