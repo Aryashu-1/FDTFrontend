@@ -6,7 +6,7 @@ import Searchdata from './components/searchdata/searchdata';
 function App() {
   return (
     <div className="App">
-      <UserHome />
+      <AdminHome />
     </div>
   );
 }

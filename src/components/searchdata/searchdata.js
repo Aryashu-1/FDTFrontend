@@ -39,24 +39,6 @@ function Searchdata() {
 
   return (
     <div>
-      <header className="header">
-        <div className="container-fluid">
-          <div className="flex">
-            <div className="logo-container">
-              <img src="https://upload.wikimedia.org/wikipedia/en/4/47/VNRVJIETLogo.png" className="logo" alt="VNRVJIET Logo" />
-            </div>
-            <div className="logo-text">
-              <span className="text">VNRVJIET</span>
-            </div>
-          </div>
-          <div className="rightside">
-            <div className="user-info">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPXG-9c1j983Z3EAwScbiKGnII2UoAEgfZsPPEDvrA0A&s" className="user-photo" alt="" />
-              <span className="username">Sample Name</span>
-            </div>
-          </div>
-        </div>
-      </header>
 
       {/* Search the data */}
       <div className="search-bar ">

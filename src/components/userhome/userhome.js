@@ -1,12 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './userhome.css';
+import Searchdata from '../searchdata/searchdata'; // Import the form page component
 
 function UserHome() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [page, setPage] = useState('home'); // State to handle page navigation
+  const [userMenuOpen, setUserMenuOpen] = useState(false); // State for user menu
+  const [activities, setActivities] = useState([]); // State to store activities data
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+
+  const handleNavigation = (page) => {
+    setPage(page);
+    setSidebarOpen(false); // Close sidebar on navigation
+  };
+
+  const toggleUserMenu = () => {
+    setUserMenuOpen(!userMenuOpen);
+  };
+
+  useEffect(() => {
+    // Fetch data from MongoDB (mocked fetch function)
+    const fetchActivities = async () => {
+      // Replace the below URL with your actual MongoDB API endpoint
+      const response = await fetch('/api/activities');
+      const data = await response.json();
+      setActivities(data);
+    };
+
+    fetchActivities();
+  }, []);
 
   return (
     <div className="userhome">
@@ -24,21 +49,55 @@ function UserHome() {
             </div>
           </div>
           <div className="rightside">
-            <div className="user-info">
+            <div className="user-info" onClick={toggleUserMenu}>
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPXG-9c1j983Z3EAwScbiKGnII2UoAEgfZsPPEDvrA0A&s" className="user-photo" alt="User" />
               <span className="username">Sample Name</span>
             </div>
+            {userMenuOpen && (
+              <div className="user-menu">
+                <button className="user-menu-item">Logout</button>
+              </div>
+            )}
           </div>
         </div>
       </header>
 
       <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <button className="sidebar-btn">Upload</button>
-        <button className="sidebar-btn">Dashboard</button>
-        <button className="sidebar-btn">Activity</button>
+        <button className="sidebar-btn" onClick={() => handleNavigation('home')}>Home</button>
+        <button className="sidebar-btn" onClick={() => handleNavigation('upload')}>Upload</button>
       </div>
 
       <div className={`overlay ${sidebarOpen ? 'show' : ''}`} onClick={toggleSidebar}></div>
+
+      {page === 'home' && (
+        <div className="content">
+          <h2 className="activity-title">Activity</h2>
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>S.No.</th>
+                <th>Name of Program</th>
+                <th>Venue</th>
+                <th>Date</th>
+                <th>Marks</th>
+              </tr>
+            </thead>
+            <tbody>
+              {activities.map((activity, index) => (
+                <tr key={activity._id}>
+                  <td>{index + 1}</td>
+                  <td>{activity.name}</td>
+                  <td>{activity.venue}</td>
+                  <td>{activity.date}</td>
+                  <td>{activity.marks}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {page === 'upload' && <Searchdata />}
     </div>
   );
 }
