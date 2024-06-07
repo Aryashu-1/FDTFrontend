@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import signUpImage from "../../assets/Signup.jpg";
-import styles from "./Signup.module.css"; // Updated import statement
+import styles from "./Signup.module.css";
 
 export default function Signup() {
   const {
@@ -16,12 +16,12 @@ export default function Signup() {
   };
 
   return (
-    <div className={styles.wrapper}> {/* Updated class name */}
-      <div className={styles.illustration}> {/* Updated class name */}
+    <div className={styles.wrapper}>
+      <div className={styles.illustration}>
         <img src={signUpImage} alt="SignUp" />
       </div>
-      <div className={styles.form}> {/* Updated class name */}
-        <div className={styles.heading}>CREATE AN ACCOUNT</div> {/* Updated class name */}
+      <div className={styles.form}>
+        <div className={styles.heading}>CREATE AN ACCOUNT</div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <input
@@ -30,7 +30,7 @@ export default function Signup() {
               placeholder="Username"
               {...register("name", { required: "Name is required" })}
             />
-            {errors.name && <p className={styles.error}>{errors.name.message}</p>} {/* Updated class name */}
+            {errors.name && <p className={styles.error}>{errors.name.message}</p>}
           </div>
           <div>
             <input
@@ -45,7 +45,22 @@ export default function Signup() {
                 },
               })}
             />
-            {errors.email && <p className={styles.error}>{errors.email.message}</p>} {/* Updated class name */}
+            {errors.email && <p className={styles.error}>{errors.email.message}</p>}
+          </div>
+          <div>
+            <input
+              type="text"
+              id="phone"
+              placeholder="Phone Number"
+              {...register("phone", {
+                required: "Phone number is required",
+                pattern: {
+                  value: /^[0-9]{10}$/,
+                  message: "Phone number must be 10 digits",
+                },
+              })}
+            />
+            {errors.phone && <p className={styles.error}>{errors.phone.message}</p>}
           </div>
           <div>
             <input
@@ -60,10 +75,10 @@ export default function Signup() {
                 },
               })}
             />
-            {errors.password && <p className={styles.error}>{errors.password.message}</p>} {/* Updated class name */}
+            {errors.password && <p className={styles.error}>{errors.password.message}</p>}
           </div>
           <button type="submit">SUBMIT</button>
-          <h2 align="center" className={styles.or}> {/* Updated class name */}
+          <h2 align="center" className={styles.or}>
             OR
           </h2>
         </form>
