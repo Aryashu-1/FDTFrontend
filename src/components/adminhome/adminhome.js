@@ -1,9 +1,11 @@
+// AdminHome.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { utils, writeFile } from 'xlsx';
+import { useNavigate } from 'react-router-dom';
 import './adminhome.css';
 
 function AdminHome() {
@@ -15,6 +17,8 @@ function AdminHome() {
   const [summaryReport, setSummaryReport] = useState([]);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (page === 'aywise-report') fetchAywiseReport();
@@ -33,6 +37,13 @@ function AdminHome() {
   const toggleUserMenu = () => {
     setUserMenuOpen(!userMenuOpen);
   };
+
+  const handleLogout = () => {
+   
+    navigate('/login'); // Redirect to login page
+  };
+
+  
 
   const handleSearch = async () => {
     try {
@@ -134,7 +145,7 @@ function AdminHome() {
             </div>
             {userMenuOpen && (
               <div className="user-menu">
-                <button className="user-menu-item">Logout</button>
+                <button className="user-menu-item" onClick={handleLogout}>Logout</button>
               </div>
             )}
           </div>
@@ -152,6 +163,7 @@ function AdminHome() {
       {page === 'home' && (
         <div className="content">
           <h1 className="title">Lecture Progress</h1>
+          ...
           <div className="search-container">
             <input
               type="text"
@@ -261,3 +273,4 @@ function AdminHome() {
 }
 
 export default AdminHome;
+
