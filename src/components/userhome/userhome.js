@@ -1,12 +1,15 @@
+// UserHome.js
 import React, { useState, useEffect } from 'react';
 import './userhome.css';
-import Searchdata from '../searchdata/searchdata'; // Import the form page component
+import Searchdata from '../searchdata/searchdata';
+import { useNavigate } from 'react-router-dom';
 
 function UserHome() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [page, setPage] = useState('home'); // State to handle page navigation
-  const [userMenuOpen, setUserMenuOpen] = useState(false); // State for user menu
-  const [activities, setActivities] = useState([]); // State to store activities data
+  const [page, setPage] = useState('home');
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [activities, setActivities] = useState([]);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -14,17 +17,20 @@ function UserHome() {
 
   const handleNavigation = (page) => {
     setPage(page);
-    setSidebarOpen(false); // Close sidebar on navigation
+    setSidebarOpen(false);
   };
 
   const toggleUserMenu = () => {
     setUserMenuOpen(!userMenuOpen);
   };
 
+  const handleLogout = () => {
+   
+    navigate('/login'); // Redirect to login page
+  };
+
   useEffect(() => {
-    // Fetch data from MongoDB (mocked fetch function)
     const fetchActivities = async () => {
-      // Replace the below URL with your actual MongoDB API endpoint
       const response = await fetch('/api/activities');
       const data = await response.json();
       setActivities(data);
@@ -55,7 +61,7 @@ function UserHome() {
             </div>
             {userMenuOpen && (
               <div className="user-menu">
-                <button className="user-menu-item">Logout</button>
+                <button className="user-menu-item" onClick={handleLogout}>Logout</button>
               </div>
             )}
           </div>
