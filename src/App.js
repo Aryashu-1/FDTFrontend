@@ -1,27 +1,62 @@
 // App.js
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import UserHome from './components/userhome/userhome';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AdminHome from './components/adminhome/adminhome';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
+import Error from './components/Error/Error';
+import UploadData from './components/UploadData/uploadData';
+import RootLayout from './components/RootLayout/RootLayout';
+import UserHome from './components/UserHomePage/UserhomePage';
+import AyReport from './components/AyReport/AyReport';
 
 function App() {
+
+  const router = createBrowserRouter([
+    {
+      path:'',
+      element:<RootLayout/>,
+      children:[
+        {
+          path:'',
+          element:<UserHome />
+        },
+        {
+          path:'/error',
+          element:<Error />
+        },
+        {
+          path:'/upload',
+          element:<UploadData />,
+          
+        },
+        {
+          path:'admin',
+          element:<AdminHome />
+        },
+        {
+          path:'/ay-report',
+          element:<AyReport />
+        }
+      ],
+    },
+    {
+      path:'/signup',
+      element:<Signup />
+    },
+    {
+      path:'/signin',
+      element: <Login />
+    },
+  ])
+
+
   return (
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/user" element={<UserHome />} />
-          <Route path="/admin" element={<AdminHome />} />
-          {/* Add routes for userhome and adminhome */}
-          <Route path="/userhome" element={<UserHome />} />
-          <Route path="/adminhome" element={<AdminHome />} />
-        </Routes>
-      </Router>
-  );
+    <div>
+      <RouterProvider router={router}/>
+    </div>
+  )
 }
 
-export default App;
+export default App

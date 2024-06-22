@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import loginImage from "../../assets/Login.jpg";
+import axios from "axios";
 
 export default function Login() {
   const {
@@ -14,13 +15,36 @@ export default function Login() {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log("Form submitted:", data);
-    setFormData(data);
-    if (data.email === "admin@gmail.com") {
-      navigate("/adminhome");
-    } else {
-      navigate("/userhome");
-    }
+
+    const signInURL = "http://127.0.0.1:13020/user/signin"
+
+    axios.post(signInURL,data)
+    .then((respose) => {
+      console.log(respose.data)
+      if(respose.data.length == 0){
+        navigate("/error")  
+        return;
+      }else{
+        // @Arya Please add a user context and Store this Data
+
+
+        
+        if (data.email === "admin@gmail.com") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+
+      }
+      
+    })
+    .catch((err) => {
+      console.log(err)
+      Navigate(to="/error")
+    })
+
+
+    
   };
 
   return (

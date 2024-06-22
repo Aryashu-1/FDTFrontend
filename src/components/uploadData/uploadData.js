@@ -10,39 +10,22 @@ function UploadData() {
     calculateDays(data.startDate, data.endDate);
   };
 
-  const calculateDays = (startDate, endDate) => {
-    const sDate = new Date(startDate);
-    const eDate = new Date(endDate);
-    const timeDifference = eDate.getTime() - sDate.getTime();
-    const daysDifference = Math.round(timeDifference / (1000 * 60 * 60 * 24));
-    console.log(daysDifference);
-    if (daysDifference <= 3) {
-      console.log("Marks := 3");
-    } else {
-      console.log("Marks := 5");
-    }
-  };
+  // const calculateDays = (startDate, endDate) => {
+  //   const sDate = new Date(startDate);
+  //   const eDate = new Date(endDate);
+  //   const timeDifference = eDate.getTime() - sDate.getTime();
+  //   const daysDifference = Math.round(timeDifference / (1000 * 60 * 60 * 24));
+  //   console.log(daysDifference);
+  //   if (daysDifference <= 3) {
+  //     console.log("Marks := 3");
+  //   } else {
+  //     console.log("Marks := 5");
+  //   }
+  // };
 
   return (
     <div>
-      <header className="header">
-        <div className="container-fluid">
-          <div className="flex">
-            <div className="logo-container">
-              <img src="https://upload.wikimedia.org/wikipedia/en/4/47/VNRVJIETLogo.png" className="logo" alt="VNRVJIET Logo" />
-            </div>
-            <div className="logo-text">
-              <span className="text">VNRVJIET</span>
-            </div>
-          </div>
-          <div className="rightside">
-            <div className="user-info">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPXG-9c1j983Z3EAwScbiKGnII2UoAEgfZsPPEDvrA0A&s" className="user-photo" alt="" />
-              <span className="username">Sample Name</span>
-            </div>
-          </div>
-        </div>
-      </header>
+      
       <div className="container mx-auto p-4">
         <div className="bg-white shadow-md rounded-lg p-6">
           <form onSubmit={handleSubmit(onSubmit)}>
