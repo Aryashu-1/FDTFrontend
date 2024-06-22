@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import loginImage from "../../assets/Login.jpg";
 import axios from "axios";
+import { UserContext } from "../../Contexts/UserContext/UserContext";
 
 export default function Login() {
+  const [user,setUser] = useContext(UserContext)
   const {
     register,
     handleSubmit,
@@ -14,19 +16,20 @@ export default function Login() {
   const [formData, setFormData] = useState({ email: "" });
   const navigate = useNavigate();
 
+
   const onSubmit = (data) => {
 
     const signInURL = "http://127.0.0.1:13020/user/signin"
 
     axios.post(signInURL,data)
-    .then((respose) => {
-      console.log(respose.data)
-      if(respose.data.length == 0){
+    .then((response) => {
+      console.log(response.data)
+      
+      if(response.data.length == 0){
         navigate("/error")  
         return;
       }else{
-        // @Arya Please add a user context and Store this Data
-
+        setUser(response.data)
 
         
         if (data.email === "admin@gmail.com") {
@@ -40,7 +43,7 @@ export default function Login() {
     })
     .catch((err) => {
       console.log(err)
-      Navigate(to="/error")
+      navigate('/error')
     })
 
 

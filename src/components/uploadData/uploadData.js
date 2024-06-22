@@ -10,18 +10,18 @@ function UploadData() {
     calculateDays(data.startDate, data.endDate);
   };
 
-  // const calculateDays = (startDate, endDate) => {
-  //   const sDate = new Date(startDate);
-  //   const eDate = new Date(endDate);
-  //   const timeDifference = eDate.getTime() - sDate.getTime();
-  //   const daysDifference = Math.round(timeDifference / (1000 * 60 * 60 * 24));
-  //   console.log(daysDifference);
-  //   if (daysDifference <= 3) {
-  //     console.log("Marks := 3");
-  //   } else {
-  //     console.log("Marks := 5");
-  //   }
-  // };
+  const calculateDays = (startDate, endDate) => {
+    const sDate = new Date(startDate);
+    const eDate = new Date(endDate);
+    const timeDifference = eDate.getTime() - sDate.getTime();
+    const daysDifference = Math.round(timeDifference / (1000 * 60 * 60 * 24));
+    console.log(daysDifference);
+    if (daysDifference <= 3) {
+      console.log("Marks := 3");
+    } else {
+      console.log("Marks := 5");
+    }
+  };
 
   return (
     <div>

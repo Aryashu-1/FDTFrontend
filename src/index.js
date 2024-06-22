@@ -4,12 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './components/Navbar/navbar';
+import UserStore from './Stores/UserStore/UserStore';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <UserStore>
     <App />
+    </UserStore>
+   
   </React.StrictMode>
 );
 

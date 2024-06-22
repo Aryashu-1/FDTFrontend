@@ -1,15 +1,18 @@
 // UserHome.js
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect,useRef, useContext } from 'react';
 import './userhome.css';
 import Searchdata from '../Searchdata/searchdata';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useReactToPrint } from 'react-to-print';
+import { UserContext } from '../../Contexts/UserContext/UserContext';
+
 
 function UserHome() {
   
   const navigate = useNavigate();
   const [activities, setActivities] = useState([]);
+  const [user,setUser ] = useContext(UserContext)
 
   // react to print code 
 
@@ -20,15 +23,16 @@ function UserHome() {
     onAfterPrint: () => console.log("after printing..."),
     removeAfterPrint: false,
   });
-
+console.log(user._id)
   
 
   useEffect(() => {
     const fetchActivities = async () => {
       const recordURL = "http://127.0.0.1:13020/record"
       const params = {
-        user : '6649dc4686b1375d28dd472d'
+        user : user._id
       }
+      console.log(recordURL)
       const response = await axios.get(recordURL,params)
       const data = response.data;
       console.log(data)
