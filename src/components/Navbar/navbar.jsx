@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
-
+import { UserContext } from '../../Contexts/UserContext/UserContext';
 
 function Navbar() {
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const [isAdmin, setAdmin] = useState(true)
-
+    const [user,setUser ] = useContext(UserContext)
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -42,7 +42,7 @@ function Navbar() {
           <div className="rightside">
             <div className="user-info" onClick={toggleUserMenu}>
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPXG-9c1j983Z3EAwScbiKGnII2UoAEgfZsPPEDvrA0A&s" className="user-photo" alt="User" />
-              <span className="username">Sample Name</span>
+              <span className="username">{user.name}</span>
             </div>
             {userMenuOpen && (
               <div className="user-menu">

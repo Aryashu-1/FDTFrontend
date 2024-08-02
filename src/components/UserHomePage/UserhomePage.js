@@ -14,6 +14,10 @@ function UserHome() {
   const [activities, setActivities] = useState([]);
   const [user,setUser ] = useContext(UserContext)
 
+  if(user._id === undefined){
+    navigate('/signin')
+  }
+
   // react to print code 
 
   const contentToPrint = useRef(null);
@@ -23,7 +27,7 @@ function UserHome() {
     onAfterPrint: () => console.log("after printing..."),
     removeAfterPrint: false,
   });
-console.log(user._id)
+  
   
 
   useEffect(() => {
@@ -32,10 +36,8 @@ console.log(user._id)
       const params = {
         user : user._id
       }
-      console.log(recordURL)
-      const response = await axios.get(recordURL,params)
+      const response = await axios.get(recordURL,{params})
       const data = response.data;
-      console.log(data)
 
       // @Arya Please create a context for this data also
 
@@ -50,7 +52,7 @@ console.log(user._id)
     
       <div className="content">
         <h2 className="activity-title">Activity</h2>
-        <table ref={contentToPrint} className="data-table">
+        <table ref={contentToPrint} className="data-table p-3">
           <thead>
             <tr>
               <th>S.No.</th>

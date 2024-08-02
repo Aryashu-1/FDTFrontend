@@ -10,6 +10,8 @@ import UploadData from './components/UploadData/uploadData';
 import RootLayout from './components/RootLayout/RootLayout';
 import UserHome from './components/UserHomePage/UserhomePage';
 import AyReport from './components/AyReport/AyReport';
+import UploadPage from './components/UploadPage/UploadPage';
+
 
 function App() {
 
@@ -28,6 +30,11 @@ function App() {
         },
         {
           path:'/upload',
+          element:<UploadPage />,
+          
+        },
+        {
+          path:'/uploadForm',
           element:<UploadData />,
           
         },
